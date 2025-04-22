@@ -9,6 +9,9 @@ namespace HelloDependencyInjection
         {
             ServiceProvider serviceProvider = RegisterTypes();
 
+            // Die Methode GetRequiredService() ist hier nur exemplarisch und werden wir
+            // in unseren Web-Applikationen so NIE verwenden!
+            // Die Abhangigkeit wird immer ueber den Konstruktor aufgeloest
             var timeService = serviceProvider.GetRequiredService<ITimeService>();
             var currentTime = timeService.GetTime();
 
@@ -26,6 +29,8 @@ namespace HelloDependencyInjection
         /// <returns></returns>
         private static ServiceProvider RegisterTypes()
         {
+            // Die ServiceCollection wird i. d. R. von der Applikation bereit gestellt und
+            // ist dafuer da um die notwenidgen Services registrieren zu koennen
             var container = new ServiceCollection();
 
             // Wir registrieren die konkrete Implementierung des Service gegen das Interface
