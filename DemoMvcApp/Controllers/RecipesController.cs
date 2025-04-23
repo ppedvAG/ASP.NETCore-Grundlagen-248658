@@ -1,20 +1,30 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BusinessModel.Contracts;
+using DemoMvcApp.Mappers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DemoMvcApp.Controllers
 {
     public class RecipesController : Controller
     {
+        private readonly IRecipeService _recipeService;
+
+        public RecipesController(IRecipeService recipeService)
+        {
+            _recipeService = recipeService;
+        }
+
         // GET: RecipesController
         public ActionResult Index()
         {
-            return View();
+            var list = _recipeService.GetAll();
+            return View(list.Select(e => e.ToViewModel()));
         }
 
         // GET: RecipesController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var model = _recipeService.GetById(id)?.ToViewModel();
+            return View(model);
         }
 
         // GET: RecipesController/Create
