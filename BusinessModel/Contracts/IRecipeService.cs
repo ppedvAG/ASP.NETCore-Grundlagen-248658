@@ -5,9 +5,9 @@ namespace BusinessModel.Contracts
     public interface IRecipeService
     {
         void Add(Recipe recipe);
-        bool Delete(int id);
+        bool Delete(long id);
         List<Recipe> GetAll();
-        Recipe? GetById(int id);
+        Recipe? GetById(long id);
         bool Update(Recipe recipe);
     }
 }

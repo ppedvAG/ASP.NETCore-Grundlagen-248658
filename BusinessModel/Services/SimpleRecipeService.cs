@@ -17,7 +17,7 @@ namespace BusinessModel.Services
             return _recipes;
         }
 
-        public Recipe? GetById(int id)
+        public Recipe? GetById(long id)
         {
             return _recipes.FirstOrDefault(r => r.Id == id);
         }
@@ -38,7 +38,7 @@ namespace BusinessModel.Services
             return false;
         }
 
-        public bool Delete(int id)
+        public bool Delete(long id)
         {
             var index = _recipes.FindIndex(r => r.Id == id);
             if (index > 0)

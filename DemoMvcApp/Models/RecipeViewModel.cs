@@ -4,7 +4,7 @@ namespace DemoMvcApp.Models
 {
     public class RecipeViewModel
     {
-        public required int Id { get; set; }
+        public required long Id { get; set; }
         public required string Name { get; set; }
         public string[] Ingredients { get; set; } = [];
         public string[] Instructions { get; set; } = [];

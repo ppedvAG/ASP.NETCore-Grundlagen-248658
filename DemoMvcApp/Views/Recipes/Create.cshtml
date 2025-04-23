@@ -1,0 +1,101 @@
+﻿@using BusinessLogic.Models.Enums
+@model DemoMvcApp.Models.CreateRecipeViewModel
+
+@{
+    ViewData["Title"] = "Neues Rezept erstellen";
+}
+
+<h4>@ViewData["Title"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ingredients" class="control-label"></label>
+                <textarea asp-for="Ingredients" class="form-control"></textarea>
+                <span asp-validation-for="Ingredients" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Instructions" class="control-label"></label>
+                <textarea asp-for="Instructions" class="form-control"></textarea>
+                <span asp-validation-for="Instructions" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrepTimeMinutes" class="control-label"></label>
+                <input type="number" asp-for="PrepTimeMinutes" class="form-control" />
+                <span asp-validation-for="PrepTimeMinutes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CookTimeMinutes" class="control-label"></label>
+                <input type="number" asp-for="CookTimeMinutes" class="form-control" />
+                <span asp-validation-for="CookTimeMinutes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Servings" class="control-label"></label>
+                <input type="number" asp-for="Servings" class="form-control" />
+                <span asp-validation-for="Servings" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CaloriesPerServing" class="control-label"></label>
+                <input type="number" asp-for="CaloriesPerServing" class="form-control" />
+                <span asp-validation-for="CaloriesPerServing" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MealType" class="control-label"></label>
+                <select asp-for="MealType" class="form-control"
+                        asp-items="Html.GetEnumSelectList<MealType>()">
+                </select>
+                <span asp-validation-for="MealType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Difficulty" class="control-label"></label>
+                <select asp-for="Difficulty" class="form-control"
+                        asp-items="Html.GetEnumSelectList<Difficulty>()">
+@*                     <options value="Easy">Easy</options>
+                    <options value="Medium">Medium</options>
+                    <options value="Hard">Hard</options> *@
+                </select>
+                <span asp-validation-for="Difficulty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cuisine" class="control-label"></label>
+                <select asp-for="Cuisine" class="form-control"
+                        asp-items="Html.GetEnumSelectList<Cuisine>()">
+                </select>
+                <span asp-validation-for="Cuisine" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tags" class="control-label"></label>
+                <input asp-for="Tags" class="form-control" placeholder="Comma separated" />
+                <span asp-validation-for="Tags" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rating" class="control-label"></label>
+                <input type="number" step="0.1" min="0" max="5" asp-for="Rating" class="form-control" />
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Neues Rezept erstellen" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Zurück zur Rezeptübersicht</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -6,7 +6,7 @@ namespace BusinessModel.Models
     [DebuggerDisplay("{Id}, {Name}, {Difficulty}, {Cuisine}, {CaloriesPerServing}, {Rating}, {Tags}")]
     public class Recipe
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public string[] Ingredients { get; set; }
         public string[] Instructions { get; set; }
