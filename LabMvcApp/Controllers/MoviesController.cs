@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LabMvcApp.Models;
+using Microsoft.AspNetCore.Mvc;
 using MovieStore.Contracts;
 using MovieStore.Models;
 
@@ -31,22 +32,32 @@ namespace LabMvcApp.Controllers
         // GET: MoviesController/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new CreateMovieViewModel());
         }
 
         // POST: MoviesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(CreateMovieViewModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
+                var movie = new Movie
+                {
+                    Title = model.Title,
+                    Description = model.Description,
+                    Genre = model.Genre,
+                    IMDBRating = model.IMDBRating,
+                    PublishedDate = model.Published,
+                    Price = model.Price
+                };
+
+                _movieService.AddMovie(movie);
+
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(model);
         }
 
         // GET: MoviesController/Edit/5
