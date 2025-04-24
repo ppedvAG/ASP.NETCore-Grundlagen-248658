@@ -2,37 +2,30 @@
 
 @model Movie
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Model.Title;
 }
 
-<style>
-    .header {
-        font-weight: bold;
-    }
-
-    .grid {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 1rem;
-    }
-
-    .flex {
-        display: flex;
-        justify-content: space-evenly;
-        align-content: center;
-        gap: 1rem;
-    }
-</style>
-
-<h2>@Model.Title</h2>
-
-<div class="grid">
-    <label class="header">IMDB Rating</label>
-    <p>@Model.IMDBRating</p>
-    <label class="header">Genre</label>
-    <p>@Model.Genre</p>
-    <label class="header">Price</label>
-    <p>@Model.Price</p>
-    <label class="header">Description</label>
-    <p>@Model.Description</p>
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="@Model.ImageUrl"
+                 class="img-fluid rounded-3 shadow"
+                 alt="@Model.Title">
+        </div>
+        <div class="col-md-8">
+            <h1>@Model.Title</h1>
+            <div class="d-flex gap-2 mb-4">
+                <span class="badge bg-primary">@Model.Genre</span>
+                <span class="badge bg-success">
+                    <i class="bi-star-fill"></i> @Model.IMDBRating/10
+                </span>
+            </div>
+            <p class="lead">@Model.Description</p>
+            <div class="d-grid gap-2 d-md-block">
+                <a href="/Movies" class="btn btn-outline-dark">
+                    <i class="bi-arrow-left"></i> Zurück
+                </a>
+            </div>
+        </div>
+    </div>
 </div>

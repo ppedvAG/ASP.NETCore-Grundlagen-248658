@@ -4,7 +4,7 @@ namespace MovieStore.Contracts
 {
     public interface IMovieService
     {
-        void AddMovie(Movie movie);
+        Task AddMovie(Movie movie, string filename = "", Stream? stream = null);
         Movie? GetById(int id);
         IList<Movie> GetMovies();
         void RemoveMovie(Movie movie);

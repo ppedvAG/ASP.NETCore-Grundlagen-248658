@@ -42,19 +42,27 @@ namespace LabMvcApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var movie = new Movie
+                try
                 {
-                    Title = model.Title,
-                    Description = model.Description,
-                    Genre = model.Genre,
-                    IMDBRating = model.IMDBRating,
-                    PublishedDate = model.Published,
-                    Price = model.Price
-                };
+                    var movie = new Movie
+                    {
+                        Title = model.Title,
+                        Description = model.Description,
+                        Genre = model.Genre,
+                        IMDBRating = model.IMDBRating,
+                        PublishedDate = model.Published,
+                        Price = model.Price
+                    };
 
-                _movieService.AddMovie(movie);
+                    using var stream = model.Image?.OpenReadStream();
+                    await _movieService.AddMovie(movie, model.Image?.FileName, stream);
 
-                return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(nameof(CreateMovieViewModel.Image), ex.Message);
+                }
             }
 
             return View(model);

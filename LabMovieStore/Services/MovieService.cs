@@ -1,4 +1,5 @@
-﻿using MovieStore.Contracts;
+﻿using BusinessModel.Contracts;
+using MovieStore.Contracts;
 using MovieStore.Models;
 
 namespace MovieStore.Services
@@ -42,6 +43,13 @@ namespace MovieStore.Services
             }
         ];
 
+        private readonly IFileService _fileService;
+
+        public MovieService(IFileService fileService)
+        {
+            _fileService = fileService;
+        }
+
         public IList<Movie> GetMovies()
         {
             return _movies;
@@ -52,8 +60,13 @@ namespace MovieStore.Services
             return _movies.FirstOrDefault(m => m.Id == id);
         }
 
-        public void AddMovie(Movie movie)
+        public async Task AddMovie(Movie movie, string filename = "", Stream? stream = null)
         {
+            if (!string.IsNullOrWhiteSpace(filename) && stream != null)
+            {
+                movie.ImageUrl = await _fileService.UploadFile(filename, stream);
+            }
+
             movie.Id = _movies.Max(m => m.Id) + 1;
             _movies.Add(movie);
         }

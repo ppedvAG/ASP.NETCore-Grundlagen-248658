@@ -13,6 +13,8 @@ namespace LabMvcApp.Models
         [Required(ErrorMessage = "Bitte Beschreibung eingeben")]
         public string Description { get; set; }
 
+        public IFormFile? Image { get; set; }
+
         [Display(Name = "Preis")]
         [DataType(DataType.Currency)]
         [Range(0, 100, ErrorMessage = "Bitte mindestens 0 eingeben")]
