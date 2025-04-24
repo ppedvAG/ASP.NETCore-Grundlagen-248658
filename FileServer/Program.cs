@@ -1,4 +1,5 @@
 
+using FileServer.Middlewares;
 using Microsoft.Extensions.FileProviders;
 
 namespace FileServer
@@ -32,6 +33,9 @@ namespace FileServer
                 FileProvider = provider,
                 RequestPath = $"/{FILE_PATH}"
             });
+
+            // POST Request auf ApiKey pruefen
+            app.UseSecuredAccess();
 
             app.UseHttpsRedirection();
 
