@@ -18,22 +18,17 @@
 
         public async Task Invoke(HttpContext context)
         {
-            if (context.Request.Method != "GET")
+            if (context.Request.Method == "GET"
+                || context.Request.Headers.TryGetValue(API_KEY_HEADER_NAME, out var apiKey)
+                && apiKey.ToString().Equals(API_KEY, StringComparison.InvariantCultureIgnoreCase))
             {
-                if (context.Request.Headers.TryGetValue(API_KEY_HEADER_NAME, out var apiKey)
-                    && apiKey.ToString().Equals(API_KEY, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    await _next(context);
-                }
-                else
-                {
-                    context.Response.StatusCode = 401; // Unauthorized
-                    await context.Response.WriteAsync("Unauthorized");
-                    return;
-                }
+                await _next(context);
             }
-
-            await _next(context);
+            else
+            {
+                context.Response.StatusCode = 401; // Unauthorized
+                await context.Response.WriteAsync("Unauthorized");
+            }
         }
     }
 
