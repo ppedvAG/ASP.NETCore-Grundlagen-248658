@@ -39,13 +39,22 @@ namespace DemoMvcApp.Controllers
         // POST: RecipesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateRecipeViewModel model)
+        public async Task<ActionResult> Create(CreateRecipeViewModel model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _recipeService.Add(model.ToDomainModel());
+                    if (model.Image != null)
+                    {
+                        var fileName = model.Image.FileName;
+                        using var stream = model.Image.OpenReadStream();
+                        await _recipeService.AddWithImage(model.ToDomainModel(), fileName, stream);
+                    } 
+                    else
+                    {
+                        _recipeService.Add(model.ToDomainModel());
+                    }
 
                     return RedirectToAction(nameof(Index));
                 }

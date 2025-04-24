@@ -45,7 +45,6 @@ namespace DemoMvcApp.Mappers
                 Name = viewModel.Name,
                 Ingredients = viewModel.Ingredients?.Split('\n') ?? [],
                 Instructions = viewModel.Instructions?.Split('\n') ?? [],
-                ImageUrl = viewModel.ImageUrl,
                 CaloriesPerServing = viewModel.CaloriesPerServing,
                 MealType = [viewModel.MealType.ToString()],
                 PrepTimeMinutes = viewModel.PrepTimeMinutes,

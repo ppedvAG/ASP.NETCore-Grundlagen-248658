@@ -11,6 +11,12 @@ namespace BusinessModel.Services
     public class SimpleRecipeService : IRecipeService
     {
         private readonly List<Recipe> _recipes = RecipeReader.FromJsonFile() ?? new List<Recipe>();
+        private readonly IFileService _fileService;
+
+        public SimpleRecipeService(IFileService fileService)
+        {
+            _fileService = fileService;
+        }
 
         public List<Recipe> GetAll()
         {
@@ -25,6 +31,12 @@ namespace BusinessModel.Services
         public void Add(Recipe recipe)
         {
             _recipes.Insert(0, recipe);
+        }
+
+        public async Task AddWithImage(Recipe recipe, string fileName, Stream stream)
+        {
+            recipe.ImageUrl = await _fileService.UploadFile(fileName, stream);
+            Add(recipe);
         }
 
         public bool Update(Recipe recipe)

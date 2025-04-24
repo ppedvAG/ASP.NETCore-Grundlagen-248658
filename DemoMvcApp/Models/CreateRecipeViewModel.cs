@@ -10,7 +10,7 @@ namespace DemoMvcApp.Models
         [MaxLength(100, ErrorMessage = "Name darf maximal 100 Zeichen lang sein!")]
         public string Name { get; set; }
 
-        public string? ImageUrl { get; set; }
+        public IFormFile? Image { get; set; }
 
         [Display(Name = "Zutaten")]
         public string? Ingredients { get; set; }
