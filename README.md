@@ -22,11 +22,13 @@ Kurs Repository zum Kurs ASP.NET Core Grundkurs der ppedv AG.
 -   [ ] Index und Details
 -   [ ] Lab: MovieService und MVC App mit Index und Details
 
-## M004 | Razor Pages
+## M004 | Layout und Design
 
--   [ ] Overview
--   [ ] Links setzen
--   [ ] Details
+-   [ ] Master Page (_Layout.cshtml)
+-   [ ] [Bootstrap Examples](https://getbootstrap.com/docs/4.0/examples/)
+-   [ ] Responsive Design
+-   [ ] ViewData, ViewBag
+-   [ ] ViewStart, ViewImports
 
 ## M005 | Forms und Validierung
 
@@ -88,7 +90,13 @@ Update-Database
 -   [ ] Form Post & Validierung
 -   [ ] MS Identity Platform gegen EntraId und GraphAPI
 
-## M011 | Weitere Themen
+## M011 | Razor Pages
+
+-   [ ] Overview
+-   [ ] Links setzen
+-   [ ] Details
+
+## M012 | Weitere Themen
 
 -   [ ] Paging
 -   [ ] Lokalisierung

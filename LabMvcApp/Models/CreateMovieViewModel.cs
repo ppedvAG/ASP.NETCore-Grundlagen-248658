@@ -25,7 +25,7 @@ namespace LabMvcApp.Models
         [Required(ErrorMessage = "Bitte Genre auswaehlen")]
         public MovieGenre Genre { get; set; }
 
-        [ClassicMovie(1950)]
+        [ClassicMovie(nameof(Genre))]
         [Display(Name = "Veröffentlichungsdatum")]
         public DateTime Published { get; set; } = new DateTime(2000, 1, 1);
     }

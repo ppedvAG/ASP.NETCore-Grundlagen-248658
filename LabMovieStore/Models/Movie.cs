@@ -9,5 +9,6 @@
         public double IMDBRating { get; set; }
         public DateTime PublishedDate { get; set; }
         public MovieGenre Genre { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Models.Enums;
 using System.Diagnostics;
+using System.Text.Json.Serialization;
 
 namespace BusinessModel.Models
 {
@@ -18,6 +19,7 @@ namespace BusinessModel.Models
         public int CaloriesPerServing { get; set; }
         public string[] Tags { get; set; }
         public int UserId { get; set; }
+        [JsonPropertyName("image")]
         public string ImageUrl { get; set; }
         public float Rating { get; set; }
         public int ReviewCount { get; set; }
