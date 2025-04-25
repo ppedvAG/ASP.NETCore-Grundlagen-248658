@@ -41,7 +41,6 @@ namespace DemoMvcApp.Mappers
         {
             return new Recipe
             {
-                Id = DateTime.Now.Ticks,
                 Name = viewModel.Name,
                 Ingredients = viewModel.Ingredients?.Split('\n') ?? [],
                 Instructions = viewModel.Instructions?.Split('\n') ?? [],

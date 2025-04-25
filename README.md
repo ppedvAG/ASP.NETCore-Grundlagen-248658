@@ -64,8 +64,9 @@ Kurs Repository zum Kurs ASP.NET Core Grundkurs der ppedv AG.
 
 ```bash
 // Package Manager Console aufrufen
+// Default project: Shared/BusinessModel
 
-Add-Migration InitMyModel -Context MyAppDbContext
+Add-Migration InitDeliveryData -Context DeliveryDbContext
 
 Update-Database
 

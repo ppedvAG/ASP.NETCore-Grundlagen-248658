@@ -8,7 +8,7 @@ namespace BusinessModel.Services
     /// Service welcher den Datenbankzugriff simulieren soll, vgl. <see cref="https://de.wikipedia.org/wiki/Repository_(Entwurfsmuster)"/>.
     /// Dieser Service bildet CRUD Operationen auf die Recipes ab, <see cref="https://de.wikipedia.org/wiki/CRUD"/>.
     /// </summary>
-    public class SimpleRecipeService : IRecipeService
+    public class SimpleRecipeService : ISimpleRecipeService
     {
         private readonly List<Recipe> _recipes = RecipeReader.FromJsonFile() ?? new List<Recipe>();
         private readonly IFileService _fileService;

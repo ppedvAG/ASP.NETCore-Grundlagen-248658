@@ -17,17 +17,17 @@ namespace DemoMvcApp.Controllers
         }
 
         // GET: RecipesController
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var list = _recipeService.GetAll();
+            var list = await _recipeService.GetAll();
             return View(list.Select(e => e.ToViewModel()));
         }
 
         // GET: RecipesController/Details/5
-        public ActionResult Details(long id)
+        public async Task<ActionResult> Details(long id)
         {
-            var model = _recipeService.GetById(id)?.ToViewModel();
-            return View(model);
+            var model = await _recipeService.GetById(id);
+            return View(model?.ToViewModel());
         }
 
         // GET: RecipesController/Create
@@ -53,7 +53,7 @@ namespace DemoMvcApp.Controllers
                     } 
                     else
                     {
-                        _recipeService.Add(model.ToDomainModel());
+                        await _recipeService.Add(model.ToDomainModel());
                     }
 
                     return RedirectToAction(nameof(Index));
@@ -99,11 +99,11 @@ namespace DemoMvcApp.Controllers
         // POST: RecipesController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(long id)
+        public async Task<ActionResult> Delete(long id)
         {
             try
             {
-                var success = _recipeService.Delete(id);
+                var success = await _recipeService.Delete(id);
                 if (success)
                 {
                     return RedirectToAction(nameof(Index));
