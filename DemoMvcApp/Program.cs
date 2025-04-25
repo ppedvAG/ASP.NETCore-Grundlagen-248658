@@ -1,5 +1,7 @@
 using BusinessModel.Contracts;
+using BusinessModel.Data;
 using BusinessModel.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace DemoMvcApp
 {
@@ -17,6 +19,12 @@ namespace DemoMvcApp
             var fileConfig = builder.Configuration.GetSection("FileServer");
             builder.Services.Configure<FileServiceOptions>(fileConfig);
             builder.Services.AddHttpClient();
+
+            // Registrierungen fuer unsere Datenbank
+            var connectionString = builder.Configuration.GetConnectionString("Default");
+            //builder.Services.AddDbContext<DeliveryDbContext>(options => options.UseSqlServer(connectionString));
+            // oder kuerzer
+            builder.Services.AddSqlServer<DeliveryDbContext>(connectionString);
 
             builder.Services.AddControllersWithViews();
 
