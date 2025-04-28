@@ -5,12 +5,12 @@ using BusinessModel.Contracts;
 
 namespace MovieStore.Services
 {
-    public class MovieService : IMovieService
+    public class MovieDbService : IMovieService
     {
         private readonly MovieDbContext _context;
         private readonly IFileService _fileService;
 
-        public MovieService(MovieDbContext context, IFileService fileService)
+        public MovieDbService(MovieDbContext context, IFileService fileService)
         {
             _context = context;
             _fileService = fileService;

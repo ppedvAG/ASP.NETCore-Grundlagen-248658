@@ -11,7 +11,7 @@ namespace LabMvcApp
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddTransient<IMovieService, MovieService>();
+            builder.Services.AddTransient<IMovieService, MovieDbService>();
             builder.Services.AddTransient<IFileService, RemoteFileService>();
 
             // Wir mappen die Einstellungen aus der appsettings.json nach FileServiceOptions
