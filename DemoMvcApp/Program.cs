@@ -17,6 +17,7 @@ namespace DemoMvcApp
             // Unser RecipeService gegen die DB darf kein Singleton mehr sein!
             // Sonst wuerde der DbContext (und damit die DB-Verbindung) nie geschlossen werden.
             builder.Services.AddTransient<IRecipeService, RecipeService>();
+            builder.Services.AddTransient<IOrderService, OrderService>();
             builder.Services.AddTransient<IFileService, RemoteFileService>();
 
             // Wir mappen die Einstellungen aus der appsettings.json nach FileServiceOptions

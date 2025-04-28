@@ -1,10 +1,42 @@
-﻿@model IEnumerable<DemoMvcApp.Models.RecipeViewModel>
+﻿@using BusinessModel.Models
+
+@model PaginatedList<RecipeViewModel>
 
 @{
     ViewData["Title"] = "Rezeptübersicht";
+    var pageSize = 12;
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
 
 <h1>Rezeptübersicht</h1>
+
+<p style="text-align: center">
+    <a role="button" class="btn btn-sm btn-default"
+        asp-action="Index"
+        asp-route-pageNumber="1"
+        asp-route-pageSize=@pageSize>
+        |&lt; Erste Seite
+    </a>
+    <a role="button" class="btn btn-sm btn-default @prevDisabled"
+        asp-action="Index"
+        asp-route-pageNumber="@(Model.PageIndex - 1)"
+        asp-route-pageSize=@pageSize>
+        &lt; &lt; Vorherige Seite
+    </a>
+    <a role="button" class="btn btn-sm btn-default @nextDisabled"
+        asp-action="Index"
+        asp-route-pageNumber="@(Model.PageIndex + 1)"
+        asp-route-pageSize=@pageSize>
+        Nächste Seite &gt;&gt;
+    </a>
+    <a role="button" class="btn btn-sm btn-default"
+        asp-action="Index"
+        asp-route-pageNumber="@(Model.TotalPages)"
+        asp-route-pageSize=@pageSize>
+        Letzte Seite &gt;|
+    </a>
+</p>
 
 <p>
     <a asp-action="Create">Neues Rezept anlegen</a>

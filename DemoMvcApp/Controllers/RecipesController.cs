@@ -17,10 +17,10 @@ namespace DemoMvcApp.Controllers
         }
 
         // GET: RecipesController
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int pageNumber = 1, int pageSize = 12)
         {
-            var list = await _recipeService.GetAll();
-            return View(list.Select(e => e.ToViewModel()));
+            var paginatedList = await _recipeService.GetAll(pageNumber, pageSize);
+            return View(paginatedList.Select(e => e.ToViewModel()));
         }
 
         // GET: RecipesController/Details/5

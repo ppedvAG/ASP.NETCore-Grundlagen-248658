@@ -19,9 +19,23 @@ namespace BusinessModel.Services
             _fileService = fileService;
         }
 
-        public Task<List<Recipe>> GetAll()
+        public async Task<PaginatedList<Recipe>> GetAll(int pageIndex = 1, int pageSize = 12)
         {
-            return _context.Recipes.ToListAsync();
+            // Anzahl der Elemente die uebersprungen werden sollen (bei Seite 1 >> 0, S. 2 >> 12 usw.)
+            int elementsToSkip = (pageIndex - 1) * pageSize;
+            var count = await _context.Recipes.CountAsync();
+
+            // Wir verwenden Linq um uns das Leben einfacher zu machen, siehe
+            // https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable
+            var items = await _context.Recipes
+                .Skip(elementsToSkip)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return new PaginatedList<Recipe>(items, count, pageSize)
+            {
+                PageIndex = pageIndex
+            };
         }
 
         public async Task<Recipe?> GetById(long id)
