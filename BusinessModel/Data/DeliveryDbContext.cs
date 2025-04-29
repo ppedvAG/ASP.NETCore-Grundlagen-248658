@@ -1,9 +1,10 @@
 ﻿using BusinessModel.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BusinessModel.Data;
 
-public class DeliveryDbContext : DbContext
+public class DeliveryDbContext : IdentityDbContext
 {
     // Allen DbSets steht jeweils eine Tabelle gegenueber
     public DbSet<Order> Orders { get; set; }
@@ -19,6 +20,8 @@ public class DeliveryDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        Seed.SeedIdentity(modelBuilder);
 
         Seed.SeedDeliveryData(modelBuilder);
     }
