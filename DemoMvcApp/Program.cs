@@ -1,6 +1,7 @@
 using BusinessModel.Contracts;
 using BusinessModel.Data;
 using BusinessModel.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace DemoMvcApp
@@ -30,6 +31,13 @@ namespace DemoMvcApp
             //builder.Services.AddDbContext<DeliveryDbContext>(options => options.UseSqlServer(connectionString));
             // oder kuerzer
             builder.Services.AddSqlServer<DeliveryDbContext>(connectionString);
+
+            // AspNetCore.Identity konfigurieren
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+            }).AddEntityFrameworkStores<DeliveryDbContext>();
 
             builder.Services.AddControllersWithViews();
 

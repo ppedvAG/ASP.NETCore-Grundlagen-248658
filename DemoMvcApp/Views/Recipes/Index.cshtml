@@ -13,34 +13,31 @@
 
 <p style="text-align: center">
     <a role="button" class="btn btn-sm btn-default"
-        asp-action="Index"
-        asp-route-pageNumber="1"
-        asp-route-pageSize=@pageSize>
+    asp-action="Index"
+    asp-route-pageNumber="1"
+    asp-route-pageSize=@pageSize>
         |&lt; Erste Seite
     </a>
     <a role="button" class="btn btn-sm btn-default @prevDisabled"
-        asp-action="Index"
-        asp-route-pageNumber="@(Model.PageIndex - 1)"
-        asp-route-pageSize=@pageSize>
+    asp-action="Index"
+    asp-route-pageNumber="@(Model.PageIndex - 1)"
+    asp-route-pageSize=@pageSize>
         &lt; &lt; Vorherige Seite
     </a>
     <a role="button" class="btn btn-sm btn-default @nextDisabled"
-        asp-action="Index"
-        asp-route-pageNumber="@(Model.PageIndex + 1)"
-        asp-route-pageSize=@pageSize>
+    asp-action="Index"
+    asp-route-pageNumber="@(Model.PageIndex + 1)"
+    asp-route-pageSize=@pageSize>
         Nächste Seite &gt;&gt;
     </a>
     <a role="button" class="btn btn-sm btn-default"
-        asp-action="Index"
-        asp-route-pageNumber="@(Model.TotalPages)"
-        asp-route-pageSize=@pageSize>
+    asp-action="Index"
+    asp-route-pageNumber="@(Model.TotalPages)"
+    asp-route-pageSize=@pageSize>
         Letzte Seite &gt;|
     </a>
 </p>
 
-<p>
-    <a asp-action="Create">Neues Rezept anlegen</a>
-</p>
 <div class="album py-5 bg-light">
     <div class="container">
         <div class="row">
@@ -55,7 +52,12 @@
                                     <!-- Wir verwenden ein Mini-Formular, um einen POST-Request fuer die Methode 'Delete' an Server senden zu koennen -->
                                     <form id="@item.Id" method="post" asp-action="Delete" asp-route-id="@item.Id">
                                         <a role="button" class="btn btn-sm btn-outline-secondary" asp-controller="Recipes" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                                        <button type="submit" class="btn btn-sm btn-outline-danger">Entfernen</button>
+                                        @if (User.Identity is not null 
+                                            && User.Identity.IsAuthenticated 
+                                            && User.IsInRole("Admin"))
+                                        {
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Entfernen</button>
+                                        }
                                     </form>
                                 </div>
                                 <small class="text-muted">@item.PrepTimeMinutes + @item.CookTimeMinutes mins</small>

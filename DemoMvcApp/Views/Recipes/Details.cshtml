@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = Model.Name;
-    var disabled = false;
+    var disabled = User.Identity.IsAuthenticated ? "" : "disabled";
 }
 
 <div class="main-container">
