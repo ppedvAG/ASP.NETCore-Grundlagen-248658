@@ -18,7 +18,7 @@ namespace LocalizedMvcApp
             // Lokalisierung einrichten
             builder.Services.AddMvc().AddMvcLocalization();
 
-            // Fuer Sprachumschaltung
+            // Fuer clientseitige Sprachumschaltung
             builder.Services.Configure<RequestLocalizationOptions>(options =>
             {
                 var supportedCultures = new List<CultureInfo>
@@ -48,6 +48,9 @@ namespace LocalizedMvcApp
             app.UseRouting();
 
             app.UseAuthorization();
+
+            // Fuer clientseitige Sprachumschaltung
+            app.UseRequestLocalization();
 
             app.MapControllerRoute(
                 name: "default",
